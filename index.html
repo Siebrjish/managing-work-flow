@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS | Engineering Workspace</title>
+
+<style>
+:root {
+  --bg: #090d14;
+  --panel: #111925;
+  --border: #202d3c;
+  --text: #e4ebf4;
+  --muted: #8291a5;
+  --green: #37d6a0;
+  --blue: #5c9dff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+header {
+  height: 68px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: #0c131e;
+}
+
+.logo {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.logo span { color: var(--green); }
+
+.status {
+  color: var(--green);
+  font-size: 12px;
+}
+
+.container {
+  max-width: 1250px;
+  margin: auto;
+  padding: 35px 24px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+h1 { font-size: 27px; margin-bottom: 7px; }
+p { color: var(--muted); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+}
+
+.card small {
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.number {
+  font-size: 30px;
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.green { color: var(--green); }
+.blue { color: var(--blue); }
+
+.section {
+  margin-top: 32px;
+}
+
+.section-title {
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.project:last-child { border: none; }
+
+.project h3 {
+  font-size: 14px;
+  margin: 0 0 7px;
+}
+
+.project p {
+  font-size: 12px;
+  margin: 0;
+}
+
+.progress {
+  width: 160px;
+  height: 6px;
+  background: #273345;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 9px;
+}
+
+.progress div {
+  height: 100%;
+  background: var(--green);
+}
+
+.task-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 6px;
+  background: #0b131e;
+  color: white;
+  border: 1px solid var(--border);
+  outline: none;
+}
+
+button {
+  background: var(--green);
+  color: #06130f;
+  border: none;
+  border-radius: 6px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover { opacity: .85; }
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 13px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.task label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.task input { flex: none; }
+
+.done {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.delete {
+  background: transparent;
+  color: #ff7777;
+  padding: 5px 9px;
+}
+
+.terminal {
+  background: #070b11;
+  border: 1px solid var(--border);
+  padding: 18px;
+  border-radius: 8px;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  min-height: 150px;
+}
+
+.terminal-output {
+  color: var(--green);
+  line-height: 1.8;
+  max-height: 130px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.terminal input {
+  width: 100%;
+  font-family: Consolas, monospace;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.activity {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.activity span {
+  color: var(--muted);
+  font-size: 11px;
+  display: block;
+  margin-top: 5px;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  padding: 30px;
+  border-top: 1px solid var(--border);
+}
+
+@media(max-width: 750px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 25px 16px; }
+  .project { align-items: flex-start; }
+  .progress { width: 100px; }
+}
+
+@media(max-width: 400px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .number { font-size: 24px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">NEXUS<span>.</span></div>
+  <div class="status">● SYSTEM ONLINE</div>
+</header>
+
+<main class="container">
+
+  <div class="top">
+    <div>
+      <h1>Engineering Overview</h1>
+      <p>Development environment / Workspace 001</p>
+    </div>
+    <div>
+      <small id="clock" class="green"></small>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <small>ACTIVE PROJECTS</small>
+      <div class="number">03</div>
+    </div>
+    <div class="card">
+      <small>TASKS COMPLETED</small>
+      <div class="number green" id="completed">0</div>
+    </div>
+    <div class="card">
+      <small>PENDING TASKS</small>
+      <div class="number" id="pending">0</div>
+    </div>
+    <div class="card">
+      <small>WORKSPACE STATUS</small>
+      <div class="number blue" style="font-size:21px">
+        Operational
+      </div>
+    </div>
+  </div>
+
+  <section class="section card">
+    <div class="section-title">01 / PROJECT REGISTRY</div>
+
+    <div class="project">
+      <div>
+        <h3>Personal Web Infrastructure</h3>
+        <p>Frontend development · HTML / CSS / JS</p>
+      </div>
+      <div>
+        <span class="green">65%</span>
+        <div class="progress"><div style="width:65%"></div></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <h3>Data Processing Module</h3>
+        <p>Backend architecture · JavaScript</p>
+      </div>
+      <div>
+        <span class="blue">40%</span>
+        <div class="progress"><div style="width:40%"></div></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <h3>System Interface Research</h3>
+        <p>UI/UX research · Documentation</p>
+      </div>
+      <div>
+        <span class="green">80%</span>
+        <div class="progress"><div style="width:80%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card">
+    <div class="section-title">02 / TASK MANAGEMENT</div>
+
+    <div class="task-input">
+      <input id="newTask" placeholder="Enter a development task...">
+      <button onclick="addTask()">ADD</button>
+    </div>
+
+    <div id="tasks"></div>
+  </section>
+
+  <section class="section card">
+    <div class="section-title">03 / TERMINAL</div>
+    <div class="terminal">
+      <div class="terminal-output" id="output">
+        NEXUS CLI v1.0.0<br>
+        Environment initialized.<br>
+        Type 'help' to view available commands.
+      </div>
+      <input id="command" placeholder="nexus@workspace:~$ Type a command..."
+      onkeydown="if(event.key==='Enter') runCommand()">
+    </div>
+  </section>
+
+  <section class="section card">
+    <div class="section-title">04 / ACTIVITY LOG</div>
+    <div id="activity">
+      <div class="activity">
+        Workspace initialized
+        <span>System event · Session start</span>
+      </div>
+      <div class="activity">
+        Project registry loaded
+        <span>Configuration · Successful</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  NEXUS ENGINEERING WORKSPACE · VERSION 1.0.0
+  <br><br>
+  Built with HTML, CSS and JavaScript
+</footer>
+
+<script>
+const defaultTasks = [
+  {name:"Review frontend architecture",done:false},
+  {name:"Update project documentation",done:false},
+  {name:"Test responsive layout",done:true},
+  {name:"Review JavaScript modules",done:false}
+];
+
+let tasks = JSON.parse(localStorage.getItem("nexusTasks")) || defaultTasks;
+
+function save() {
+  localStorage.setItem("nexusTasks",JSON.stringify(tasks));
+}
+
+function render() {
+  const area = document.getElementById("tasks");
+  area.innerHTML = "";
+
+  tasks.forEach((task,index) => {
+    const item = document.createElement("div");
+    item.className = "task";
+
+    const label = document.createElement("label");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.done;
+
+    checkbox.onchange = () => {
+      tasks[index].done = checkbox.checked;
+      save();
+      render();
+      logActivity("Task status updated");
+    };
+
+    const name = document.createElement("span");
+    name.textContent = task.name;
+    if(task.done) name.className = "done";
+
+    label.append(checkbox,name);
+
+    const remove = document.createElement("button");
+    remove.className = "delete";
+    remove.textContent = "×";
+    remove.onclick = () => {
+      tasks.splice(index,1);
+      save();
+      render();
+      logActivity("Task removed");
+    };
+
+    item.append(label,remove);
+    area.appendChild(item);
+  });
+
+  document.getElementById("completed").textContent =
+    tasks.filter(t=>t.done).length;
+
+  document.getElementById("pending").textContent =
+    tasks.filter(t=>!t.done).length;
+}
+
+function addTask() {
+  const input = document.getElementById("newTask");
+  const value = input.value.trim();
+
+  if(!value) return;
+
+  tasks.push({name:value,done:false});
+  input.value = "";
+  save();
+  render();
+  logActivity("New task added");
+}
+
+function logActivity(message) {
+  const activity = document.getElementById("activity");
+  const entry = document.createElement("div");
+  entry.className = "activity";
+
+  const title = document.createElement("div");
+  title.textContent = message;
+
+  const time = document.createElement("span");
+  time.textContent = "Workspace event · " +
+    new Date().toLocaleTimeString();
+
+  entry.append(title,time);
+  activity.prepend(entry);
+}
+
+function runCommand() {
+  const input = document.getElementById("command");
+  const output = document.getElementById("output");
+  const cmd = input.value.trim().toLowerCase();
+
+  if(!cmd) return;
+
+  const line = document.createElement("div");
+  line.textContent = "$ " + cmd;
+  output.appendChild(line);
+
+  const result = document.createElement("div");
+  result.style.color = "#8291a5";
+
+  const commands = {
+    help: "Available: help, status, projects, tasks, date, clear",
+    status: "System operational. Local workspace active.",
+    projects: "3 registered projects. See project registry.",
+    tasks: tasks.length + " tasks registered. " +
+      tasks.filter(t=>!t.done).length + " pending.",
+    date: new Date().toString(),
+    clear: ""
+  };
+
+  if(cmd === "clear") {
+    output.innerHTML = "Terminal cleared.";
+  } else {
+    result.textContent = commands[cmd] ||
+      "Command not recognized. Type 'help'.";
+    output.appendChild(result);
+  }
+
+  input.value = "";
+  output.scrollTop = output.scrollHeight;
+}
+
+function updateClock() {
+  document.getElementById("clock").textContent =
+    new Date().toLocaleString("en-IN",{
+      dateStyle:"medium",
+      timeStyle:"medium"
+    });
+}
+
+render();
+updateClock();
+setInterval(updateClock,1000);
+</script>
+
+</body>
+</html>
